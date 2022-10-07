@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const getFibonacci = (end) => {
   console.log('get all fibonacci numbers...');
@@ -9,7 +9,7 @@ const getFibonacci = (end) => {
   const allNumberWithFibonacci = [];
 
   while (nextTerm <= end) {
-    allNumberWithFibonacci.push(nextTerm)
+    allNumberWithFibonacci.push(nextTerm);
     n1 = n2;
     n2 = nextTerm;
     nextTerm = n1 + n2;
@@ -18,14 +18,35 @@ const getFibonacci = (end) => {
   return allNumberWithFibonacci;
 }
 
+const useTime = () => {
+  const [time, setTime] = useState(new Date());
+  
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+  
+    return () => {
+      window.clearInterval(intervalId);
+    }
+  }, []);
+  
+  return time;
+}
+
 function Fibonacci() {
   const [fibo, setFibo] = useState(1000000);
   console.log('App rendering...');
+
+  const time = useTime();
 
   const allNumberWithFibonacci = getFibonacci(fibo);
 
   return (
     <div className="App">
+      <div className='time'>
+        {`${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`}
+      </div>
       <input type='number' onChange={({ target: { value } }) => setFibo(parseInt(value))} value={fibo} />
       <div>
         All fibonacci number: {allNumberWithFibonacci.join(', ')}

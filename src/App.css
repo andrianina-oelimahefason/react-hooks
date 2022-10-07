@@ -7,3 +7,17 @@
 * {
   font-size: 2.5vh;
 }
+
+.time {
+  position: absolute;
+  top: 10vh;
+  right: 10vh;
+  background: white;
+  padding: 10px;
+  border-radius: 9px;
+  box-shadow: 0px 0px 8px 1px rgb(0 0 0 / 68%);
+  min-width: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
